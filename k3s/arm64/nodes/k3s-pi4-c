@@ -11,12 +11,10 @@ chpasswd:
 ssh_pwauth: false
 
 ssh_import_id:
-- gh:billimek
+- gh:miethe
 
 ssh_authorized_keys:
-  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBmSHyH/Zxn9G+HPwWPkPfjlrqCYulCfO2JyS3pXUrYu jeff@home
-  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIPxC7tpkvLpiRhr+62opkoQRqIBrH2aRUaEj+QiiTb jeff@wsl
-  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAY0lnCjTZRbBLMIhbZ/qC7E499OWhAHjI8me4GoFgdJ jeff@MacBook-Air.local
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDW58z2f26wCjeZji7Ic3Oe2fULZbVKiCmS8USL2uBy6AKzoMji5FBJRLSWo4mCHs0OzrbrChvD5RbYj90YRVs+gNqgCi6P+ZoF6CEPgZkHRXKzfQ2/FFZwDw0AT9ZeHn9YFDI8w9plsAkDDnNp4FHT6p8pmkpOFTusUhjszrS1bL/ZhTiqnDJuVMLgb/k86VOx5Y3KbgmxVvZpJotJTy0pS3JtrTCbZ5sXrvcfAXCPXktZlkZL/aJiQdyn0KJ7WPobLdr0dC2gXNxL02leomqvKQ6hr8XTrI1n4vAdelCw7zJuY9mNFCoKmUvrFfcGeG3jysApku7QgRjS5AWuFBq2usjWiMHaLjjSMhgJo8cbJzA0roUfgbiKN1SZ6W8GFqpNCSQjktPt+dEgPl3Ov8bRRzpOebYFpdLW2G7B513N3WeR85mENch74WLTfqCMXV/YmCbGc6ysEt8E4d2Svsmgdw4A/zAf5pjtlWiDuEKaGLjg7rUXjukHn8DTAQb/LlM= pi
 
 ## Update apt database and upgrade packages on first boot
 package_update: true
@@ -25,7 +23,7 @@ package_upgrade: true
 ntp:
   enabled: true
   servers:
-    - 10.0.7.1
+    - 10.0.4.1
 
 packages:
 - curl
@@ -35,6 +33,6 @@ packages:
 
 runcmd:
 - ln -sfn /run/systemd/resolve/resolv.conf /etc/resolv.conf
-- curl -sfL https://get.k3s.io | K3S_URL=https://k3s-0:6443 K3S_TOKEN=$K3S_TOKEN sh -s - --node-taint arm=true:NoExecute --node-label "k3s-upgrade=enabled"
+- curl -sfL https://get.k3s.io | K3S_URL=https://k3s-pi4-0:6443 K3S_TOKEN=$K3S_TOKEN sh -s - --node-taint arm=true:NoExecute --node-label "k3s-upgrade=enabled"
 - sync
 - reboot -f
